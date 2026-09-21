@@ -1,0 +1,16 @@
+# Source logo (the web copies are assets/logo.png and assets/logo-cream.png)
+Mello Acres Logo.jpeg
+
+# Session screenshots and scratch renders. Kept out of the repo because the whole
+# branch is published, so anything committed here goes live on the site.
+Claude outputs/
+
+# Photo drop-box — working originals, not the website. Only processed web copies
+# in assets/img/ ever ship.
+assets/img/new/
+
+# Build/transfer leftovers
+*.tar.gz
+.DS_Store
+Thumbs.db
+__pycache__/
