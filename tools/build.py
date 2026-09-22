@@ -54,7 +54,12 @@ EMAIL = "connect@melloacres.com"
 #   value. It looks like
 #   https://melloacres.us12.list-manage.com/subscribe/post?u=XXXX&id=YYYY
 CONTACT_ENDPOINT = ""
-MAILCHIMP_ACTION = ""
+MAILCHIMP_ACTION = ("https://melloacres.us5.list-manage.com/subscribe/post"
+                    "?u=05bae587d6dd6eedf89125582&amp;id=14930b50e0&amp;f_id=00786ae0f0")
+# Mailchimp's bot-trap field. Its name is unique to this audience and the input
+# must stay empty and off-screen - a real person filling it in marks the signup
+# as spam, which is the point.
+MAILCHIMP_BOT_FIELD = "b_05bae587d6dd6eedf89125582_14930b50e0"
 
 NAV = [
     ("/", "Home"),
@@ -260,7 +265,7 @@ def contact_form():
     </form>"""
 
 
-def signup_form(button="Join the list"):
+def signup_form(button="Join the list", field_id="mce-EMAIL"):
     """Mailchimp email capture, or a link to the contact page until it's set."""
     if not MAILCHIMP_ACTION:
         return f"""<div class="actions" style="margin-top:22px">
@@ -269,9 +274,13 @@ def signup_form(button="Join the list"):
     </div>"""
     return f"""<form class="signup-form" action="{MAILCHIMP_ACTION}" method="post"
           target="_blank" novalidate>
-      <label class="sr" for="mce-EMAIL">Email address</label>
-      <input id="mce-EMAIL" type="email" name="EMAIL" placeholder="your email address"
+      <label class="sr" for="{field_id}">Email address</label>
+      <input id="{field_id}" type="email" name="EMAIL" placeholder="your email address"
              autocomplete="email" required>
+      <div class="hp" aria-hidden="true">
+        <input type="text" name="{MAILCHIMP_BOT_FIELD}" tabindex="-1" value=""
+               autocomplete="off">
+      </div>
       <button class="btn btn-solid" type="submit" name="subscribe">{button}</button>
     </form>"""
 
@@ -287,7 +296,7 @@ TOKENS = {
     "{{EMAIL_LINK}}": f'<a href="mailto:{EMAIL}">{EMAIL}</a>',
     "{{CONTACT_FORM}}": contact_form(),
     "{{SIGNUP_FORM}}": signup_form(),
-    "{{SIGNUP_FORM_BLOOMS}}": signup_form("Tell me when they're ready"),
+    "{{SIGNUP_FORM_BLOOMS}}": signup_form("Tell me when they're ready", "mce-EMAIL-2"),
 }
 
 
