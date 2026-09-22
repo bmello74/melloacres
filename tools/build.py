@@ -4,8 +4,11 @@ melloacres.com site generator.
 
 Plain HTML in, plain HTML out. Every page is a body fragment in tools/pages/
 with a small JSON header; this script wraps each one in the shared head,
-masthead, nav and footer and writes it to its published path, then regenerates
-sitemap.xml.
+masthead, nav and footer and writes it into docs/, then regenerates sitemap.xml.
+
+docs/ is the published website — GitHub Pages is set to "main / docs". Anything
+outside docs/ (this script, the page sources, the guide templates) stays in the
+repository but is never served from melloacres.com.
 
     python3 tools/build.py            # rebuild the whole site
     python3 tools/build.py guides     # rebuild one page
@@ -23,6 +26,11 @@ from datetime import date
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGES = os.path.join(ROOT, "tools", "pages")
 
+# Everything that goes live is written into docs/. GitHub Pages is pointed at
+# "main / docs", so this folder IS the website and nothing outside it is ever
+# served — which is how tools/ stays off melloacres.com.
+OUT = os.path.join(ROOT, "docs")
+
 # --------------------------------------------------------------------------
 # CONFIG — the whole site's shared facts
 # --------------------------------------------------------------------------
@@ -34,6 +42,19 @@ PLACE = "Hanford, California"
 PHONE = "(559) 836-2880"
 PHONE_HREF = "tel:+15598362880"
 EMAIL = "connect@melloacres.com"
+
+# --- The two hosted endpoints -------------------------------------------------
+# Both are optional. Leave either empty and the site quietly falls back to
+# call/email buttons, so the pages are never broken while you set them up.
+#
+# CONTACT_ENDPOINT — the form handler's POST url (Formspree, Basin, Web3Forms...).
+#   Paste the endpoint the service gives you after you confirm the address.
+# MAILCHIMP_ACTION — the Mailchimp embedded-form action url. In Mailchimp:
+#   Audience > Signup forms > Embedded form, then copy the <form action="...">
+#   value. It looks like
+#   https://melloacres.us12.list-manage.com/subscribe/post?u=XXXX&id=YYYY
+CONTACT_ENDPOINT = ""
+MAILCHIMP_ACTION = ""
 
 NAV = [
     ("/", "Home"),
@@ -186,6 +207,75 @@ def chrome_bottom():
 """
 
 
+def contact_form():
+    """The full inquiry form, or call/email buttons until an endpoint is set."""
+    if not CONTACT_ENDPOINT:
+        return f"""<div class="actions">
+      <a class="btn btn-ink" href="{PHONE_HREF}">Call {PHONE}</a>
+      <a class="btn btn-outline" href="mailto:{EMAIL}">Send an email</a>
+    </div>"""
+    return f"""<form class="form" action="{CONTACT_ENDPOINT}" method="POST">
+      <div class="form-row">
+        <p class="field"><label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required></p>
+        <p class="field"><label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required></p>
+      </div>
+      <div class="form-row">
+        <p class="field"><label for="f-phone">Phone <span class="opt">optional</span></label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel"></p>
+        <p class="field"><label for="f-interest">What are you interested in?</label>
+          <select id="f-interest" name="interest">
+            <option>Hatching eggs</option>
+            <option>Started goslings</option>
+            <option>Cut flowers</option>
+            <option>Dahlia tubers</option>
+            <option>Cattle</option>
+            <option>Something else</option>
+          </select></p>
+      </div>
+      <div class="form-row">
+        <p class="field"><label for="f-variety">Which breed or variety <span class="opt">optional</span></label>
+          <input id="f-variety" name="variety" type="text"
+                 placeholder="Sebastopol, Bresse, mixed duck&hellip;"></p>
+        <p class="field"><label for="f-qty">How many <span class="opt">optional</span></label>
+          <input id="f-qty" name="quantity" type="text" placeholder="A dozen eggs, two goslings&hellip;"></p>
+      </div>
+      <div class="form-row">
+        <p class="field"><label for="f-when">When would you like it?</label>
+          <input id="f-when" name="when" type="text" placeholder="This spring, the week of the 14th&hellip;"></p>
+        <p class="field"><label for="f-collect">Pick up or ship?</label>
+          <select id="f-collect" name="collection">
+            <option>I'll pick up at the farm</option>
+            <option>I'd like to ask about shipping</option>
+            <option>Not sure yet</option>
+          </select></p>
+      </div>
+      <p class="field"><label for="f-note">Anything else you'd like us to know</label>
+        <textarea id="f-note" name="message" rows="4"></textarea></p>
+      <p class="hp" aria-hidden="true"><label>Leave this empty<input name="_gotcha" type="text" tabindex="-1" autocomplete="off"></label></p>
+      <p class="form-actions"><button class="btn btn-ink" type="submit">Send to {OWNER}</button></p>
+      <p class="form-note">Prefer to talk? Call <a href="{PHONE_HREF}">{PHONE}</a> or email
+        <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+    </form>"""
+
+
+def signup_form(button="Join the list"):
+    """Mailchimp email capture, or a link to the contact page until it's set."""
+    if not MAILCHIMP_ACTION:
+        return f"""<div class="actions" style="margin-top:22px">
+      <a class="btn btn-solid" href="/contact/">{button}</a>
+      <a class="btn btn-ghost" href="{PHONE_HREF}">{PHONE}</a>
+    </div>"""
+    return f"""<form class="signup-form" action="{MAILCHIMP_ACTION}" method="post"
+          target="_blank" novalidate>
+      <label class="sr" for="mce-EMAIL">Email address</label>
+      <input id="mce-EMAIL" type="email" name="EMAIL" placeholder="your email address"
+             autocomplete="email" required>
+      <button class="btn btn-solid" type="submit" name="subscribe">{button}</button>
+    </form>"""
+
+
 TOKENS = {
     "{{PHONE}}": PHONE,
     "{{PHONE_HREF}}": PHONE_HREF,
@@ -195,6 +285,9 @@ TOKENS = {
     "{{NAME}}": NAME,
     "{{PHONE_LINK}}": f'<a href="{PHONE_HREF}">{PHONE}</a>',
     "{{EMAIL_LINK}}": f'<a href="mailto:{EMAIL}">{EMAIL}</a>',
+    "{{CONTACT_FORM}}": contact_form(),
+    "{{SIGNUP_FORM}}": signup_form(),
+    "{{SIGNUP_FORM_BLOOMS}}": signup_form("Tell me when they're ready"),
 }
 
 
@@ -215,11 +308,11 @@ def build(name):
     meta, body = read_page(name)
     path = meta["path"]                      # e.g. "/flock/"
     if path == "/":
-        out = os.path.join(ROOT, "index.html")
+        out = os.path.join(OUT, "index.html")
     elif path.endswith(".html"):                 # standalone, e.g. /404.html
-        out = os.path.join(ROOT, path.lstrip("/"))
+        out = os.path.join(OUT, path.lstrip("/"))
     else:
-        out = os.path.join(ROOT, path.strip("/") + "/index.html")
+        out = os.path.join(OUT, path.strip("/") + "/index.html")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
         f.write(head(meta, path) + chrome_top(path) + body + chrome_bottom())
@@ -231,7 +324,7 @@ def sitemap(paths):
     urls = "\n".join(
         f"  <url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod>"
         f"<priority>{'1.0' if p == '/' else '0.8'}</priority></url>" for p in sorted(paths))
-    with open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8") as f:
+    with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                 f"{urls}\n</urlset>\n")
