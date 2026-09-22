@@ -2,7 +2,7 @@
 
 The Mello Acres website. Plain HTML — no CMS, no database, no build step beyond
 one Python script. Hosted free on **GitHub Pages**, which redeploys
-automatically on every push to `main`. The domain is registered at GoDaddy and
+automatically on every push to `master`. The domain is registered at GoDaddy and
 points here with DNS records only, so email stays on GoDaddy untouched.
 
 ## Layout
@@ -26,7 +26,7 @@ tools/                         NOT PUBLISHED — source, kept in the repo only
   guide-raising-chicks.html    source for the chick-raising guide PDF
 ```
 
-GitHub Pages is set to **`main` / `docs`**, so only `docs/` is served. Anything
+GitHub Pages is set to **`master` / `docs`**, so only `docs/` is served. Anything
 outside it — this README, the build script, the page sources — lives in the
 repository but never appears on melloacres.com.
 

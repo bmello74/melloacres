@@ -6,7 +6,7 @@ Plain HTML in, plain HTML out. Every page is a body fragment in tools/pages/
 with a small JSON header; this script wraps each one in the shared head,
 masthead, nav and footer and writes it into docs/, then regenerates sitemap.xml.
 
-docs/ is the published website — GitHub Pages is set to "main / docs". Anything
+docs/ is the published website — GitHub Pages is set to "master / docs". Anything
 outside docs/ (this script, the page sources, the guide templates) stays in the
 repository but is never served from melloacres.com.
 
@@ -27,7 +27,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGES = os.path.join(ROOT, "tools", "pages")
 
 # Everything that goes live is written into docs/. GitHub Pages is pointed at
-# "main / docs", so this folder IS the website and nothing outside it is ever
+# "master / docs", so this folder IS the website and nothing outside it is ever
 # served — which is how tools/ stays off melloacres.com.
 OUT = os.path.join(ROOT, "docs")
 
