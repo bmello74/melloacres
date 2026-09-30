@@ -16,6 +16,8 @@ docs/                          THE WEBSITE — everything GitHub Pages serves
   assets/logo.png              wordmark extracted from the logo (black)
   assets/logo-cream.png        the same wordmark for dark backgrounds
   assets/img/                  site photography
+  assets/img/flowers/          dahlia photos: NAME.jpg (1200x1600) + NAME-sm.jpg (600x800)
+  assets/slideshow.js          the flowers-page slideshow (no libraries)
   assets/guides/               the printable PDF guides
 
 tools/                         NOT PUBLISHED — source, kept in the repo only
@@ -56,6 +58,17 @@ once there and rebuild; every page picks it up. Page bodies can use the tokens
 The guides are written as HTML in `tools/` and rendered to PDF with headless
 Chromium. After editing `tools/guide-hatching.html` or
 `tools/guide-raising-chicks.html`, re-render them into `docs/assets/guides/`.
+
+## Adding flower photos
+
+Drop the originals into `Flower Pictures/` (kept out of git — they're large and
+carry GPS location data). Resize them into `docs/assets/img/flowers/` as a
+1200x1600 `NAME.jpg` and a 600x800 `NAME-sm.jpg`, saved **without EXIF** so the
+location never goes public. Then add a `<figure class="ss-slide">` block for it
+in `tools/pages/flowers.html` (copy one of the existing ones) and rebuild. The
+slideshow picks up any number of slides and rotates through nine entrance
+effects — fade, slide, circle, zoom, wipe, blur, diagonal, rise and bloom — in
+turn. The list lives at the top of `docs/assets/slideshow.js`.
 
 ## Still to wire up
 

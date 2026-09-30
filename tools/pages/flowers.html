@@ -2,7 +2,7 @@
   "path": "/flowers/",
   "title": "Dahlias — Cut Flowers & Tubers — Mello Acres",
   "description": "Dahlias grown with love in Hanford, California. Fresh cut stems and bunches through a long Central Valley season, and tubers to start your own patch. Ask us what's blooming.",
-  "image": "/assets/img/dahlia-peach.jpg"
+  "image": "/assets/img/flowers/social-flowers.jpg"
 } -->
 
 <section class="pagehead">
@@ -15,7 +15,72 @@
   </div>
 </section>
 
-<section>
+<section class="showcase">
+  <div class="wrap">
+    <div class="slideshow" data-slideshow role="region" aria-roledescription="carousel"
+         aria-label="Dahlias from our patch">
+      <div class="ss-stage">
+      <figure class="ss-slide is-active">
+        <img class="ss-bg" src="/assets/img/flowers/sunset-sm.jpg" alt="" aria-hidden="true" width="600" height="800">
+        <img class="ss-img" src="/assets/img/flowers/sunset.jpg" alt="An apricot dahlia with a deep plum center, beside the garden fence" width="1200" height="1600">
+        <figcaption><span>Sunset shades</span>Apricot petals curling around a plum-dark heart</figcaption>
+      </figure>
+      <figure class="ss-slide" aria-hidden="true">
+        <img class="ss-bg" src="/assets/img/flowers/blush-sm.jpg" alt="" aria-hidden="true" width="600" height="800" loading="lazy">
+        <img class="ss-img" src="/assets/img/flowers/blush.jpg" alt="A large blush-pink dinner-plate dahlia in the garden" width="1200" height="1600" loading="lazy">
+        <figcaption><span>Soft and romantic</span>Blush petals that open a little more every morning</figcaption>
+      </figure>
+      <figure class="ss-slide" aria-hidden="true">
+        <img class="ss-bg" src="/assets/img/flowers/red-pom-sm.jpg" alt="" aria-hidden="true" width="600" height="800" loading="lazy">
+        <img class="ss-img" src="/assets/img/flowers/red-pom.jpg" alt="A bright red pompon dahlia held in an open hand" width="1200" height="1600" loading="lazy">
+        <figcaption><span>Small wonders</span>A perfect little pom, just the size of your palm</figcaption>
+      </figure>
+      <figure class="ss-slide" aria-hidden="true">
+        <img class="ss-bg" src="/assets/img/flowers/striped-sm.jpg" alt="" aria-hidden="true" width="600" height="800" loading="lazy">
+        <img class="ss-img" src="/assets/img/flowers/striped.jpg" alt="A huge lavender and white striped dahlia in evening light" width="1200" height="1600" loading="lazy">
+        <figcaption><span>Painted by nature</span>Lavender and white, streaked like watercolor</figcaption>
+      </figure>
+      <figure class="ss-slide" aria-hidden="true">
+        <img class="ss-bg" src="/assets/img/flowers/bouquet-sm.jpg" alt="" aria-hidden="true" width="600" height="800" loading="lazy">
+        <img class="ss-img" src="/assets/img/flowers/bouquet.jpg" alt="A bouquet of white, coral, red and pink dahlias in a wooden vase" width="1200" height="1600" loading="lazy">
+        <figcaption><span>Patch to table</span>A morning&rsquo;s gathering, arranged for the kitchen table</figcaption>
+      </figure>
+      <figure class="ss-slide" aria-hidden="true">
+        <img class="ss-bg" src="/assets/img/flowers/cream-sm.jpg" alt="" aria-hidden="true" width="600" height="800" loading="lazy">
+        <img class="ss-img" src="/assets/img/flowers/cream.jpg" alt="A creamy ivory dahlia with a peach center among green leaves" width="1200" height="1600" loading="lazy">
+        <figcaption><span>Creamy dinner-plates</span>Ivory blooms with a whisper of peach at the center</figcaption>
+      </figure>
+      <figure class="ss-slide" aria-hidden="true">
+        <img class="ss-bg" src="/assets/img/flowers/pink-sm.jpg" alt="" aria-hidden="true" width="600" height="800" loading="lazy">
+        <img class="ss-img" src="/assets/img/flowers/pink.jpg" alt="A bright pink dahlia fully open in the garden bed" width="1200" height="1600" loading="lazy">
+        <figcaption><span>Pure cheer</span>Bubblegum pink, every bit as happy as it looks</figcaption>
+      </figure>
+      <figure class="ss-slide" aria-hidden="true">
+        <img class="ss-bg" src="/assets/img/flowers/little-helper-sm.jpg" alt="" aria-hidden="true" width="600" height="800" loading="lazy">
+        <img class="ss-img" src="/assets/img/flowers/little-helper.jpg" alt="A little girl admiring a coral pompon dahlia while holding another" width="1200" height="1600" loading="lazy">
+        <figcaption><span>Our littlest flower lover</span>Choosing her favorite from the patch</figcaption>
+      </figure>
+      <figure class="ss-slide" aria-hidden="true">
+        <img class="ss-bg" src="/assets/img/flowers/apricot-sm.jpg" alt="" aria-hidden="true" width="600" height="800" loading="lazy">
+        <img class="ss-img" src="/assets/img/flowers/apricot.jpg" alt="A butter-yellow and rose dahlia with curling petals, a bud beside it" width="1200" height="1600" loading="lazy">
+        <figcaption><span>Butter and rose</span>Twisting petals washed in soft yellow and pink</figcaption>
+      </figure>
+        <button class="ss-btn ss-prev" type="button" aria-label="Previous photo">&#8249;</button>
+        <button class="ss-btn ss-next" type="button" aria-label="Next photo">&#8250;</button>
+        <div class="ss-progress" aria-hidden="true"></div>
+      </div>
+      <div class="ss-bar">
+        <div class="ss-dots" aria-label="Choose a photo"></div>
+        <span class="ss-count" aria-hidden="true">1 / 9</span>
+        <button class="ss-toggle" type="button" aria-pressed="false">Pause</button>
+      </div>
+      <p class="sr ss-live" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+<script src="/assets/slideshow.js" defer></script>
+
+<section style="padding-top:0">
   <div class="wrap">
     <div class="cards">
       <div class="card">
@@ -56,8 +121,11 @@
 
 <section>
   <div class="wrap">
-    <div class="sechead"><h2>What's blooming right now</h2></div>
-    <div class="prose">
+    <div class="feature">
+      <img src="/assets/img/flowers/bouquet-sm.jpg" alt="A bouquet of white, coral, red and pink dahlias in a wooden vase" width="600" height="800" loading="lazy">
+      <div>
+        <div class="sechead"><h2>What's blooming right now</h2></div>
+        <div class="prose">
       <p>Rather than post a list that's out of date within the week, we'd much rather tell you
          what's actually standing in the patch the day you ask. Call {{PHONE_LINK}} or write to
          {{EMAIL_LINK}} and we'll share what's open, what's just about to be, and how long we
@@ -65,17 +133,14 @@
       <p>Planning something special &mdash; a celebration, a wedding, a standing weekly bunch for
          the kitchen table? Tell us the date. Dahlias keep their own calendar, but we'll give you
          our honest, hopeful read on what that week should bring.</p>
-    </div>
-    <div class="actions" style="margin-top:22px">
+        </div>
+        <div class="actions" style="margin-top:22px">
       <a class="btn btn-ink" href="/contact/">Ask what's blooming</a>
     </div>
   </div>
+    </div>
+  </div>
 </section>
-
-<div class="gallery">
-  <img src="/assets/img/dahlia-peach.jpg" alt="A peach and magenta dahlia in full bloom" width="437" height="403" loading="lazy">
-  <img src="/assets/img/dahlia-white.jpg" alt="A cream dahlia among green leaves" width="437" height="363" loading="lazy">
-</div>
 
 <section class="band signup">
   <div class="wrap">

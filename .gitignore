@@ -17,3 +17,6 @@ __pycache__/
 
 # Source guide PDFs — staged copies go in assets/guides/ once confirmed.
 Hatching and raising guides/
+
+# original, full-size photos (large, with GPS data) — web copies live in docs/assets/img
+Flower Pictures/
