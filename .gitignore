@@ -5,7 +5,7 @@ Mello Acres Logo.jpeg
 # branch is published, so anything committed here goes live on the site.
 Claude outputs/
 
-# Photo drop-box — working originals, not the website. Only processed web copies
+# Photo drop-box - working originals, not the website. Only processed web copies
 # in assets/img/ ever ship.
 assets/img/new/
 
@@ -15,8 +15,8 @@ assets/img/new/
 Thumbs.db
 __pycache__/
 
-# Source guide PDFs — staged copies go in assets/guides/ once confirmed.
+# Source guide PDFs - staged copies go in assets/guides/ once confirmed.
 Hatching and raising guides/
 
-# original, full-size photos (large, with GPS data) — web copies live in docs/assets/img
+# original, full-size photos (large, with GPS data) - web copies live in docs/assets/img
 Flower Pictures/

@@ -6,14 +6,14 @@ Plain HTML in, plain HTML out. Every page is a body fragment in tools/pages/
 with a small JSON header; this script wraps each one in the shared head,
 masthead, nav and footer and writes it into docs/, then regenerates sitemap.xml.
 
-docs/ is the published website — GitHub Pages is set to "master / docs". Anything
+docs/ is the published website - GitHub Pages is set to "master / docs". Anything
 outside docs/ (this script, the page sources, the guide templates) stays in the
 repository but is never served from melloacres.com.
 
     python3 tools/build.py            # rebuild the whole site
     python3 tools/build.py guides     # rebuild one page
 
-Contact details, the nav and the footer live in CONFIG below — change them in
+Contact details, the nav and the footer live in CONFIG below - change them in
 one place and rebuild.
 """
 
@@ -28,11 +28,11 @@ PAGES = os.path.join(ROOT, "tools", "pages")
 
 # Everything that goes live is written into docs/. GitHub Pages is pointed at
 # "master / docs", so this folder IS the website and nothing outside it is ever
-# served — which is how tools/ stays off melloacres.com.
+# served - which is how tools/ stays off melloacres.com.
 OUT = os.path.join(ROOT, "docs")
 
 # --------------------------------------------------------------------------
-# CONFIG — the whole site's shared facts
+# CONFIG - the whole site's shared facts
 # --------------------------------------------------------------------------
 
 SITE = "https://melloacres.com"
@@ -47,9 +47,9 @@ EMAIL = "connect@melloacres.com"
 # Both are optional. Leave either empty and the site quietly falls back to
 # call/email buttons, so the pages are never broken while you set them up.
 #
-# CONTACT_ENDPOINT — the form handler's POST url (Formspree, Basin, Web3Forms...).
+# CONTACT_ENDPOINT - the form handler's POST url (Formspree, Basin, Web3Forms...).
 #   Paste the endpoint the service gives you after you confirm the address.
-# MAILCHIMP_ACTION — the Mailchimp embedded-form action url. In Mailchimp:
+# MAILCHIMP_ACTION - the Mailchimp embedded-form action url. In Mailchimp:
 #   Audience > Signup forms > Embedded form, then copy the <form action="...">
 #   value. It looks like
 #   https://melloacres.us12.list-manage.com/subscribe/post?u=XXXX&id=YYYY
@@ -159,8 +159,8 @@ def chrome_top(path):
 <header class="masthead">
   <div class="wrap">
     <a class="brand" href="/">
-      <img class="on-light" src="/assets/logo.png" alt="{NAME} &mdash; Farm, Flock, Flowers" width="1400" height="334">
-      <img class="on-dark" src="/assets/logo-cream.png" alt="{NAME} &mdash; Farm, Flock, Flowers" width="1400" height="334">
+      <img class="on-light" src="/assets/logo.png" alt="{NAME}: Farm, Flock, Flowers" width="1400" height="334">
+      <img class="on-dark" src="/assets/logo-cream.png" alt="{NAME}: Farm, Flock, Flowers" width="1400" height="334">
     </a>
     <div class="mast-right">
       <span class="mast-tag">{PLACE}</span>

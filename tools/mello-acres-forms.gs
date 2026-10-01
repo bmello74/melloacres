@@ -1,5 +1,5 @@
 /**
- * Mello Acres — inquiry forms
+ * Mello Acres - inquiry forms
  * ---------------------------------------------------------------------------
  * Run setUp() ONCE. It builds both inquiry forms, wires up the email
  * notifications, and prints the links you need for the website.
@@ -8,11 +8,11 @@
  * someone submits a form it emails the farm and sends the customer a receipt.
  *
  * To change the wording later, edit the text in this file and save. You do not
- * need to run setUp() again — only do that if you want to build fresh forms.
+ * need to run setUp() again - only do that if you want to build fresh forms.
  */
 
 // ---------------------------------------------------------------------------
-// Settings — edit these if anything changes
+// Settings - edit these if anything changes
 // ---------------------------------------------------------------------------
 
 var FARM_NAME  = 'Mello Acres';
@@ -39,9 +39,9 @@ function setUp() {
   var flock   = buildFlockForm();
   var flowers = buildFlowersForm();
 
-  // One spreadsheet holding both forms' responses, a tab each — a running
+  // One spreadsheet holding both forms' responses, a tab each - a running
   // list Michelle can sort, filter and keep notes in.
-  var book = SpreadsheetApp.create(FARM_NAME + ' — Website Inquiries');
+  var book = SpreadsheetApp.create(FARM_NAME + ': Website Inquiries');
 
   [flock, flowers].forEach(function (form) {
     form.setDestination(FormApp.DestinationType.SPREADSHEET, book.getId());
@@ -86,14 +86,14 @@ function setUp() {
 // ===========================================================================
 
 function buildFlockForm() {
-  var form = FormApp.create('Mello Acres — Flock Inquiry');
+  var form = FormApp.create('Mello Acres: Flock Inquiry');
 
   form.setTitle('Tell us what you’re hoping for')
       .setDescription(
         'We’d love to help you find the right birds. Share a few details below and ' +
         OWNER_NAME + ' will be in touch soon with what’s available and what’s coming.')
       .setConfirmationMessage(
-        'Thank you — your note is on its way to us!\n\n' +
+        'Thank you, your note is on its way to us!\n\n' +
         'Watch for a confirmation in your inbox, and we’ll follow up personally very soon. ' +
         'If you’d rather talk it through, give us a ring at ' + FARM_PHONE + '.')
       .setAllowResponseEdits(false)
@@ -107,18 +107,18 @@ function buildFlockForm() {
       .setRequired(true)
       .setValidation(FormApp.createTextValidation()
         .requireTextIsEmail()
-        .setHelpText('Please check the email address — it looks incomplete.')
+        .setHelpText('Please check the email address, it looks incomplete.')
         .build());
 
-  form.addTextItem().setTitle('Phone number').setHelpText('Optional — handy if it’s easier to talk.');
+  form.addTextItem().setTitle('Phone number').setHelpText('Optional: handy if it’s easier to talk.');
 
   form.addListItem()
       .setTitle('What are you hoping for?')
       .setChoiceValues([
         'Hatching eggs',
         'Started goslings',
-        'Either — whatever is available',
-        'Not sure yet — I’d love some guidance'])
+        'Either: whatever is available',
+        'Not sure yet: I’d love some guidance'])
       .setRequired(true);
 
   form.addListItem()
@@ -130,7 +130,7 @@ function buildFlockForm() {
         'Bresse chickens',
         'Mixed duck eggs',
         'Mixed chicken eggs',
-        'Not sure — please help me choose'])
+        'Not sure: please help me choose'])
       .setRequired(true);
 
   form.addListItem()
@@ -145,7 +145,7 @@ function buildFlockForm() {
 
   form.addTextItem()
       .setTitle('Color preference, if you have one')
-      .setHelpText('Optional — tell us if a particular color matters to you and we’ll do our best.');
+      .setHelpText('Optional: tell us if a particular color matters to you and we’ll do our best.');
 
   form.addListItem()
       .setTitle('When would you like them?')
@@ -153,7 +153,7 @@ function buildFlockForm() {
         'As soon as they’re available',
         'Within the next month',
         'Sometime this season',
-        'Next season — I’m planning ahead',
+        'Next season: I’m planning ahead',
         'I’m flexible']);
 
   form.addListItem()
@@ -165,7 +165,7 @@ function buildFlockForm() {
 
   form.addParagraphTextItem()
       .setTitle('Anything else we should know?')
-      .setHelpText('Optional — tell us about your flock, your setup, or what you’re planning.');
+      .setHelpText('Optional: tell us about your flock, your setup, or what you’re planning.');
 
   return form;
 }
@@ -176,7 +176,7 @@ function buildFlockForm() {
 // ===========================================================================
 
 function buildFlowersForm() {
-  var form = FormApp.create('Mello Acres — Dahlia Inquiry');
+  var form = FormApp.create('Mello Acres: Dahlia Inquiry');
 
   form.setTitle('Tell us what you have in mind')
       .setDescription(
@@ -184,7 +184,7 @@ function buildFlowersForm() {
         'we’d love to help. Share a few details and ' + OWNER_NAME +
         ' will let you know what’s blooming and what’s coming.')
       .setConfirmationMessage(
-        'Thank you — your note is on its way to us!\n\n' +
+        'Thank you, your note is on its way to us!\n\n' +
         'Watch for a confirmation in your inbox, and we’ll follow up personally very soon. ' +
         'If you’d rather talk it through, give us a ring at ' + FARM_PHONE + '.')
       .setAllowResponseEdits(false)
@@ -198,10 +198,10 @@ function buildFlowersForm() {
       .setRequired(true)
       .setValidation(FormApp.createTextValidation()
         .requireTextIsEmail()
-        .setHelpText('Please check the email address — it looks incomplete.')
+        .setHelpText('Please check the email address, it looks incomplete.')
         .build());
 
-  form.addTextItem().setTitle('Phone number').setHelpText('Optional — handy if it’s easier to talk.');
+  form.addTextItem().setTitle('Phone number').setHelpText('Optional: handy if it’s easier to talk.');
 
   form.addListItem()
       .setTitle('What are you hoping for?')
@@ -209,12 +209,12 @@ function buildFlowersForm() {
         'Cut flowers',
         'Tubers',
         'Both',
-        'Not sure yet — I’d love some guidance'])
+        'Not sure yet: I’d love some guidance'])
       .setRequired(true);
 
   form.addCheckboxItem()
       .setTitle('Colors you’re drawn to')
-      .setHelpText('Choose as many as you like — we’ll tell you what we have in those shades.')
+      .setHelpText('Choose as many as you like: we’ll tell you what we have in those shades.')
       .setChoiceValues([
         'Blush and soft pink',
         'Coral and peach',
@@ -224,11 +224,11 @@ function buildFlowersForm() {
         'Cream and white',
         'Purple and lavender',
         'Bicolor and variegated',
-        'Open to anything — surprise me']);
+        'Open to anything, surprise me']);
 
   form.addParagraphTextItem()
       .setTitle('Varieties you have in mind')
-      .setHelpText('Optional — if you already know the names you’re after, list them here.');
+      .setHelpText('Optional: if you already know the names you’re after, list them here.');
 
   form.addListItem()
       .setTitle('How much are you thinking?')
@@ -243,11 +243,11 @@ function buildFlowersForm() {
 
   form.addTextItem()
       .setTitle('Date you need them, if you have one')
-      .setHelpText('Optional — a wedding, a party, a standing weekly bunch.');
+      .setHelpText('Optional: a wedding, a party, a standing weekly bunch.');
 
   form.addParagraphTextItem()
       .setTitle('Anything else we should know?')
-      .setHelpText('Optional — tell us about the occasion or what you’re picturing.');
+      .setHelpText('Optional: tell us about the occasion or what you’re picturing.');
 
   return form;
 }
@@ -402,7 +402,7 @@ function sendReceipt(kind, name, email, rows) {
   MailApp.sendEmail({
     to: email,
     replyTo: OWNER_MAIL,
-    subject: 'We received your note — ' + FARM_NAME,
+    subject: 'We received your note: ' + FARM_NAME,
     htmlBody: html,
     body: plain,
     name: FARM_NAME

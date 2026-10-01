@@ -1,4 +1,4 @@
-/* Mello Acres printed guides — shared print stylesheet.
+/* Mello Acres printed guides - shared print stylesheet.
    Rendered to PDF with headless Chromium at Letter size. */
 
 @page { size: Letter; margin: 0.55in 0.6in 0.6in; }
