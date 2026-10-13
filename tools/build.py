@@ -54,6 +54,13 @@ EMAIL = "connect@melloacres.com"
 #   value. It looks like
 #   https://melloacres.us12.list-manage.com/subscribe/post?u=XXXX&id=YYYY
 CONTACT_ENDPOINT = ""
+
+# WAITLIST_TO - every wait list signup on the site is emailed here by FormSubmit
+#   (formsubmit.co). The very first signup sends an "Activate Form" email to this
+#   address; click it once and every signup after that comes straight through.
+WAITLIST_TO = EMAIL
+WAITLIST_AJAX = f"https://formsubmit.co/ajax/{WAITLIST_TO}"
+WAITLIST_POST = f"https://formsubmit.co/{WAITLIST_TO}"
 MAILCHIMP_ACTION = ("https://melloacres.us5.list-manage.com/subscribe/post"
                     "?u=05bae587d6dd6eedf89125582&amp;id=14930b50e0&amp;f_id=00786ae0f0")
 # Mailchimp's bot-trap field. Its name is unique to this audience and the input
@@ -68,12 +75,12 @@ NAV = [
     ("/farm/", "Farm"),
     ("/guides/", "Guides"),
     ("/about/", "About"),
-    ("/contact/", "Contact"),
+    ("/contact/", "Wait List"),
 ]
 
 FOOT_COLS = [
     ("The farm", [("/flock/", "Flock"), ("/flowers/", "Flowers"), ("/farm/", "Farm")]),
-    ("More", [("/guides/", "Guides"), ("/about/", "About"), ("/contact/", "Contact")]),
+    ("More", [("/guides/", "Guides"), ("/about/", "About"), ("/contact/", "Wait List")]),
 ]
 
 FONTS = ("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700"
@@ -164,7 +171,7 @@ def chrome_top(path):
     </a>
     <div class="mast-right">
       <span class="mast-tag">{PLACE}</span>
-      <a class="callbtn" href="{PHONE_HREF}">{PHONE}</a>
+      <a class="callbtn" href="/contact/">Join the wait list</a>
     </div>
   </div>
 </header>
@@ -198,9 +205,10 @@ def chrome_bottom():
       <p style="margin:0;color:var(--band-soft)">Farm &middot; Flock &middot; Flowers<br>{PLACE}</p>
     </div>{cols}
     <div>
-      <h4>Get in touch</h4>
-      <a href="{PHONE_HREF}">{PHONE}</a>
-      <a href="mailto:{EMAIL}">{EMAIL}</a>
+      <h4>Wait lists</h4>
+      <a href="/flock/#waitlist">Eggs &amp; goslings</a>
+      <a href="/flowers/#waitlist">Dahlias &amp; tubers</a>
+      <a href="/farm/#waitlist">Cattle</a>
     </div>
   </div>
   <div class="legal">
@@ -285,6 +293,78 @@ def signup_form(button="Join the list", field_id="mce-EMAIL"):
     </form>"""
 
 
+# The choices each page's wait list offers. The key is used in the page token,
+# e.g. {{WAITLIST_FLOCK}}. Groups are (heading, [choices]); a heading of None
+# shows the choices without a heading.
+WAITLISTS = {
+    "flock": ("Flock", [
+        ("Sebastopol geese", ["Sebastopol hatching eggs", "Sebastopol goslings"]),
+        ("Embden geese", ["Embden hatching eggs", "Embden goslings"]),
+        ("Toulouse geese", ["Toulouse hatching eggs", "Toulouse goslings"]),
+        ("Chickens and ducks", ["Bresse hatching eggs", "Mixed duck hatching eggs",
+                                "Mixed chicken hatching eggs"]),
+    ]),
+    "flowers": ("Dahlias", [
+        (None, ["Cut flowers", "Dahlia tubers", "Flowers for a wedding or event"]),
+    ]),
+    "farm": ("Cattle", [
+        (None, ["Registered Shorthorn", "Shorthorn Plus", "Club calf"]),
+    ]),
+}
+WAITLISTS["all"] = ("General", [
+    ("Geese", WAITLISTS["flock"][1][0][1] + WAITLISTS["flock"][1][1][1]
+              + WAITLISTS["flock"][1][2][1]),
+    ("Chickens and ducks", WAITLISTS["flock"][1][3][1]),
+    ("Dahlias", WAITLISTS["flowers"][1][0][1]),
+    ("Cattle", WAITLISTS["farm"][1][0][1]),
+])
+
+
+def waitlist_form(key, page_path):
+    """A wait list signup form. Signups are emailed to WAITLIST_TO."""
+    label, groups = WAITLISTS[key]
+    k = key[:3]
+    choices = ""
+    n = 0
+    for heading, items in groups:
+        boxes = ""
+        for item in items:
+            n += 1
+            boxes += (f'\n          <label class="choice"><input type="checkbox" '
+                      f'name="Interested in" value="{item}"> <span>{item}</span></label>')
+        head = f'\n        <p class="choice-head">{heading}</p>' if heading else ""
+        choices += f'\n      <div class="choice-group">{head}{boxes}\n      </div>'
+    return f"""<form class="form waitlist" action="{WAITLIST_POST}" method="POST"
+          data-waitlist data-endpoint="{WAITLIST_AJAX}">
+      <input type="hidden" name="_subject" value="Wait list signup: {label} (melloacres.com)">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="{SITE}{page_path}#waitlist">
+      <input type="hidden" name="Signed up on" value="{SITE}{page_path}">
+      <div class="form-row">
+        <p class="field"><label for="{k}-first">First name</label>
+          <input id="{k}-first" name="First name" type="text" autocomplete="given-name" required></p>
+        <p class="field"><label for="{k}-last">Last name</label>
+          <input id="{k}-last" name="Last name" type="text" autocomplete="family-name" required></p>
+      </div>
+      <div class="form-row">
+        <p class="field"><label for="{k}-email">Email</label>
+          <input id="{k}-email" name="email" type="email" autocomplete="email" required></p>
+        <p class="field"><label for="{k}-phone">Phone</label>
+          <input id="{k}-phone" name="Phone" type="tel" autocomplete="tel" required></p>
+      </div>
+      <fieldset class="choices">
+        <legend>What would you love to be on the list for?</legend>{choices}
+      </fieldset>
+      <p class="field"><label for="{k}-note">Anything you'd like us to know <span class="opt">optional</span></label>
+        <textarea id="{k}-note" name="Message" rows="4"
+          placeholder="How many you're hoping for, a date you have in mind, a color you love&hellip;"></textarea></p>
+      <p class="hp" aria-hidden="true"><label>Leave this empty<input name="_honey" type="text" tabindex="-1" autocomplete="off"></label></p>
+      <p class="form-actions"><button class="btn btn-ink" type="submit">Add me to the wait list</button></p>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>"""
+
+
 TOKENS = {
     "{{PHONE}}": PHONE,
     "{{PHONE_HREF}}": PHONE_HREF,
@@ -310,6 +390,12 @@ def read_page(name):
     body = raw[m.end():]
     for token, value in TOKENS.items():
         body = body.replace(token, value)
+    for key in WAITLISTS:
+        token = "{{WAITLIST_" + key.upper() + "}}"
+        if token in body:
+            body = body.replace(token, waitlist_form(key, meta["path"]))
+    if "data-waitlist" in body:
+        body += '\n<script src="/assets/waitlist.js" defer></script>\n'
     return meta, body
 
 

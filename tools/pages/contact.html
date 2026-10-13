@@ -1,45 +1,23 @@
 <!-- {
   "path": "/contact/",
-  "title": "Contact Mello Acres | Hanford, California",
-  "description": "We'd love to hear from you. Call (559) 836-2880 or email connect@melloacres.com about hatching eggs, goslings, dahlias, tubers or cattle at Mello Acres in Hanford, California.",
+  "title": "Join the Wait List | Mello Acres",
+  "description": "Join the Mello Acres wait list for goose hatching eggs and goslings, Bresse and mixed hatching eggs, dahlias, tubers and Shorthorn cattle in Hanford, California.",
   "image": "/assets/img/social-card.jpg"
 } -->
 
 <section class="pagehead">
   <div class="wrap">
-    <div class="eyebrow">Contact</div>
-    <h1>We'd love to hear from you</h1>
-    <p class="tag">Call or write and you'll reach {{OWNER}}. Tell us what you have in mind and
-       roughly when you'd like it, and we'll let you know just where things stand.</p>
+    <div class="eyebrow">Wait list</div>
+    <h1>Save your spot</h1>
+    <p class="tag">Add your name to our wait list, tick everything you're hoping for, and
+       {{OWNER}} will reach out to you personally when it's ready.</p>
   </div>
 </section>
 
-<section>
+<section id="waitlist">
   <div class="wrap">
-    <div class="contact-grid">
-      <div>
-        <h3>Call</h3>
-        <a class="bigcontact" href="{{PHONE_HREF}}">{{PHONE}}</a>
-        <p style="margin-top:8px">{{OWNER}}, owner</p>
-      </div>
-      <div>
-        <h3>Email</h3>
-        <a class="bigcontact" href="mailto:{{EMAIL}}">{{EMAIL}}</a>
-        <p style="margin-top:8px">Lovely for sending a list, or a photo of what you're planning.</p>
-      </div>
-      <div>
-        <h3>Find us</h3>
-        <span class="bigcontact">Hanford, California</span>
-        <p style="margin-top:8px">Kings County, in the Central Valley. Visits are by arrangement, so do give us a ring before you drive out and we'll have everything ready.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sechead"><h2>Send us a note</h2></div>
-    {{CONTACT_FORM}}
+    <div class="sechead"><h2>Join the wait list</h2></div>
+    {{WAITLIST_ALL}}
   </div>
 </section>
 
@@ -47,9 +25,9 @@
   <div class="wrap">
     <div class="sechead"><h2>A few helpful details</h2></div>
     <div class="prose">
-      <p class="lede">The more you tell us, the more useful our answer can be. Something like
-         &ldquo;six Sebastopol eggs sometime this spring, and I'm happy to drive out&rdquo; will
-         get you a real answer the very same day.</p>
+      <p class="lede">The more you share in your note, the more helpful we can be. Something like
+         &ldquo;six Sebastopol eggs sometime this spring, and I'm happy to drive out&rdquo; tells
+         us exactly what to save for you.</p>
 
       <h2>Eggs and goslings</h2>
       <ul>
@@ -75,8 +53,8 @@
     </div>
 
     <div class="note">
-      <p>We're a small farm rather than an office, so if we're out with the birds when you ring,
-         please do leave a message and we'll call you right back.</p>
+      <p>We're a small family farm rather than an office, so if we're out with the birds when
+         your note arrives, we'll get back to you just as soon as we're in.</p>
     </div>
   </div>
 </section>
@@ -91,11 +69,10 @@
 <section class="band signup">
   <div class="wrap">
     <div class="eyebrow">We're glad you're here</div>
-    <h2>{{PHONE}}</h2>
-    <p>Or write to {{EMAIL}}, whichever is easiest for you.</p>
+    <h2>Have a question that isn't about the wait list?</h2>
+    <p>You'll find our phone number and email on our About page.</p>
     <div class="actions" style="margin-top:22px">
-      <a class="btn btn-solid" href="{{PHONE_HREF}}">Call {{PHONE}}</a>
-      <a class="btn btn-ghost" href="mailto:{{EMAIL}}">Send an email</a>
+      <a class="btn btn-solid" href="/about/#contact">Visit our About page</a>
     </div>
   </div>
 </section>
