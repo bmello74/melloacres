@@ -20,7 +20,7 @@
       var picked = [];
       Array.prototype.forEach.call(boxes, function (b) { if (b.checked) picked.push(b.value); });
       if (boxes.length && !picked.length) {
-        say('Please tick at least one thing you would love to be on the list for.', true);
+        say('Please click at least one thing you would love to be on the list for.', true);
         boxes[0].focus();
         return;
       }
