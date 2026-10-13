@@ -318,6 +318,7 @@ section.tight { padding:40px 0; }
 .signup-form input[type=email]::placeholder { color:#8A7A6E; }
 .signup-form input[type=email]:focus { outline:2px solid var(--bloom-lit); outline-offset:1px; }
 .signup-form button { border:0; font-family:inherit; cursor:pointer; }
+.signup .signup-cta { margin-top:22px; }
 
 /* ---------- dahlia slideshow (flowers page) ----------
    Every slide sits in the same frame. The incoming slide plays one of several
