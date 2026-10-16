@@ -46,6 +46,7 @@
         .then(function (r) { return r.json().catch(function () { return {}; }); })
         .then(function (res) {
           if (String(res.success) !== 'true') throw new Error(res.message || 'not sent');
+          if (window.gtag) gtag('event', 'generate_lead', { form_name: 'wait_list', interest: data['Interested in'] || '', page_path: location.pathname });
           var first = data['First name'] || 'friend';
           var done = document.createElement('div');
           done.className = 'waitlist-done';

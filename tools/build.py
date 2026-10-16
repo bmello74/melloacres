@@ -41,6 +41,10 @@ OWNER = "Michelle Mello"
 PLACE = "Hanford, California"
 PHONE = "(559) 836-2880"
 PHONE_HREF = "tel:+15598362880"
+
+# GA_ID - Google Analytics 4 measurement ID for melloacres.com (owned by
+#   bryanmello74@gmail.com). Feeds the monthly website report.
+GA_ID = "G-YDR5S9JRFE"
 EMAIL = "connect@melloacres.com"
 
 # --- The two hosted endpoints -------------------------------------------------
@@ -125,6 +129,10 @@ def head(meta, path):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Analytics 4 (visits, clicks, wait list signups) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA_ID}');</script>
+<script src="/assets/analytics.js" defer></script>
 <title>{meta['title']}</title>
 <meta name="description" content="{meta['description']}">
 <link rel="canonical" href="{url}">
