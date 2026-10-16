@@ -30,3 +30,6 @@ Geese pictures/
 # Not part of the site (kept on disk, never published)
 Geese_on_Grass_web.mp4
 .tmp.driveupload/
+
+# Monthly website reports (kept local, never published)
+Reports/
