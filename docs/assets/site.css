@@ -471,3 +471,8 @@ section.tight { padding:40px 0; }
   .lw-tile figcaption { font-size:17px; padding:30px 10px 8px; }
 }
 @media (prefers-reduced-motion:reduce) { .lw-tile img, .lw-tile video { transition:none; } }
+
+/* builder credit, links back to bmelloag.com (standard on every site B. Mello builds) */
+.foot .legal .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 24px}
+.foot .credit a{display:inline;padding:0;color:var(--band-ink, #F4EFE3);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.foot .credit a:hover{color:var(--bloom-lit)}

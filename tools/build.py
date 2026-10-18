@@ -220,7 +220,8 @@ def chrome_bottom():
     </div>
   </div>
   <div class="legal">
-    <div class="wrap">&copy; {date.today().year} {NAME}, {PLACE}. {OWNER}, owner.</div>
+    <div class="wrap"><span>&copy; {date.today().year} {NAME}, {PLACE}. {OWNER}, owner.</span>
+      <span class="credit">Website by <a href="https://bmelloag.com/web-and-marketing/?utm_source=melloacres.com&amp;utm_medium=referral&amp;utm_campaign=site-credit" target="_blank" rel="noopener">B. Mello Ag Services</a></span></div>
   </div>
 </footer>
 </body>
